@@ -1,43 +1,111 @@
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Scanner;
-
+/**
+ * This class simulates a conversation with a bot that mirrors certain words
+ * and provides a transcript of the conversation at the end.
+ */
 class Conversation {
-
+/**
+ * This is the entry point of the conversation program. It handles user input, 
+ * mirrors responses, and prints a transcript of the conversation.
+ * @param arguments Command line arguments (not used in this program)
+ */
   public static void main(String[] arguments) {
     // You will start the conversation here.
     
     Scanner input = new Scanner(System.in);
     //create a scanner object to read input from console
 
-    List<String> transcript = new ArrayList<>();
-    //create a list for transcript
-
     int round=0;
-    int cnt=0;
-    System.out.print("How many round? ");
-    round = input.nextInt();
-    System.out.println("great let's start talking "+ round + " round, what do you want to talk about?");
-    //set the round limit
-    String talk = input.nextLine();
-    //
     
-    while(cnt<round){
+    System.out.print("How many round? ");
+    round = input.nextInt();//set the round limit
+    input.nextLine();
+    String[] userInput = new String[round];
+    System.out.println("Hi there!  What's on your mind?");  
+    String[] botResponse = new String[round];
+    
+    for(int i=0;i<round;i++){
       System.out.print("you: ");
-      talk=input.nextLine();
-      String botReply="humm";
-      System.out.println(botReply);
-      cnt++;
-      transcript.add(talk);
-      transcript.add(botReply);
-    }
-    //do the talking
 
-    System.out.println("\n--- Conversation Transcript ---");
-    for (String line : transcript) {
-      System.out.println(line);
+      userInput[i]=input.nextLine();
+      System.out.print("bot: ");
+      botResponse[i] = mirrorWords(userInput[i]);
+      System.out.println(botResponse[i]);
+      
+
     }
-    //print a transcript
+   
+    System.out.println("see ya!");
+    // Print the transcript
+    System.out.println("----------TRANSCRIPT:-----------");
+    ArrayList<String> transcript = new ArrayList<>();
+
+   transcript.add("Hi there!  What's on your mind?");
+   for(int i=0;i<round;i++){
+      transcript.add(userInput[i]);
+      transcript.add(botResponse[i]);
+   }
+   
+    transcript.add("See ya!");
+
+    for (String element : transcript) {
+      System.out.println(element);
+  }
+    input.close();
+  }
+  /**
+ * This method mirrors specific words like "I" to "you", "am" to "are", etc., 
+ * and returns the mirrored sentence.
+ * @param input The user's input string
+ * @return The mirrored response string
+ */
+    private static String mirrorWords(String input) {
+      // Define word pairs for mirroring
+      
+      String[] result = input.split(" ");
+      String[] original = Arrays.copyOf(result, result.length);
+      for (int i = 0; i < result.length; i++) {
+      // Loop through the word pairs and replace if the input contains the word
+        if (result[i].equals("I")) {
+          result[i] = "you"; // Replace with the mirrored word
+        }
+        else if (result[i].equals("me")) {
+          result[i] = "you"; // Replace with the mirrored word
+        }
+        else if (result[i].equals("am")) {
+          result[i] = "are"; // Replace with the mirrored word
+        }
+        else if (result[i].equals("you")) {
+          result[i] = "I"; // Replace with the mirrored word     
+        }
+        else if (result[i].equals("my")) {
+          result[i] = "your"; // Replace with the mirrored word
+        }
+        else if (result[i].equals("your")) {
+          result[i] = "my"; // Replace with the mirrored word
+        }
+      }
+      if(Arrays.equals(result, original)){
+        String cannedWord="Mmm-hm";
+        return cannedWord;
+      }
+      else{
+        
+        return String.join(" ", result)+"?";
+      }
+  
+ 
 
   }
+ 
 }
+/* 
+System.out.println("-----------------------------");
+String[]tran=userInput[0].split(" ");
+for (String element : tran) {
+  System.out.println(element);
+}
+System.out.println("-----------------------------");
+*/
