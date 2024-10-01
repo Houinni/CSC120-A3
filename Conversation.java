@@ -12,7 +12,7 @@ class Conversation {
  * @param arguments Command line arguments (not used in this program)
  */
   public static void main(String[] arguments) {
-    // You will start the conversation here.
+    // start the conversation 
     
     Scanner input = new Scanner(System.in);
     //create a scanner object to read input from console
@@ -101,11 +101,3 @@ class Conversation {
   }
  
 }
-/* 
-System.out.println("-----------------------------");
-String[]tran=userInput[0].split(" ");
-for (String element : tran) {
-  System.out.println(element);
-}
-System.out.println("-----------------------------");
-*/
