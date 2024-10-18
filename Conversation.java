@@ -55,6 +55,7 @@ class Conversation {
   }
     input.close();
   }
+ 
   /**
  * This method mirrors specific words like "I" to "you", "am" to "are", etc., 
  * and returns the mirrored sentence.
@@ -66,33 +67,28 @@ class Conversation {
       
       String[] result = input.split(" ");
       String[] original = Arrays.copyOf(result, result.length);
+      String[] cannedWordArrayString = {"Mmm-hm","Ah-ha","Agree","You're sick","love ya"};
       for (int i = 0; i < result.length; i++) {
       // Loop through the word pairs and replace if the input contains the word
         if (result[i].equals("I")) {
-          result[i] = "you"; // Replace with the mirrored word
-        }
-        else if (result[i].equals("me")) {
-          result[i] = "you"; // Replace with the mirrored word
-        }
-        else if (result[i].equals("am")) {
-          result[i] = "are"; // Replace with the mirrored word
-        }
-        else if (result[i].equals("you")) {
-          result[i] = "I"; // Replace with the mirrored word     
-        }
-        else if (result[i].equals("my")) {
-          result[i] = "your"; // Replace with the mirrored word
-        }
-        else if (result[i].equals("your")) {
-          result[i] = "my"; // Replace with the mirrored word
-        }
+          result[i] = "you"; 
+        }else if (result[i].equals("me")) {
+          result[i] = "you"; 
+        }else if (result[i].equals("am")) {
+          result[i] = "are"; 
+        }else if (result[i].equals("You")) {
+          result[i] = "I";  
+        } else if (result[i].equals("my")) {
+          result[i] = "your"; 
+        } else if (result[i].equals("your")) {
+          result[i] = "my"; 
+        } 
       }
       if(Arrays.equals(result, original)){
-        String cannedWord="Mmm-hm";
+        int randomIndex = (int) (Math.random() * cannedWordArrayString.length);
+        String cannedWord= cannedWordArrayString[randomIndex];
         return cannedWord;
-      }
-      else{
-        
+      }else{
         return String.join(" ", result)+"?";
       }
   
