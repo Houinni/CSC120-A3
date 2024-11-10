@@ -11,6 +11,7 @@ class Conversation {
  * mirrors responses, and prints a transcript of the conversation.
  * @param arguments Command line arguments (not used in this program)
  */
+  static String[] cannedWordArrayString = {"Mmm-hm","Ah-ha","Agree","You're sick","love ya"};
   public static void main(String[] arguments) {
     // start the conversation 
     
@@ -67,7 +68,6 @@ class Conversation {
       
       String[] result = input.split(" ");
       String[] original = Arrays.copyOf(result, result.length);
-      String[] cannedWordArrayString = {"Mmm-hm","Ah-ha","Agree","You're sick","love ya"};
       for (int i = 0; i < result.length; i++) {
       // Loop through the word pairs and replace if the input contains the word
         if (result[i].equals("I")) {
@@ -76,7 +76,9 @@ class Conversation {
           result[i] = "you"; 
         }else if (result[i].equals("am")) {
           result[i] = "are"; 
-        }else if (result[i].equals("You")) {
+        }else if (result[i].equals("are")) {
+          result[i] = "am"; 
+        }else if (result[i].equals("you")) {
           result[i] = "I";  
         } else if (result[i].equals("my")) {
           result[i] = "your"; 
@@ -91,8 +93,6 @@ class Conversation {
       }else{
         return String.join(" ", result)+"?";
       }
-  
- 
 
   }
  
